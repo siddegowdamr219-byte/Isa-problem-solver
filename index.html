@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive Instruction Set Architecture learning and problem-solving website.">
+  <title>ISA Problem Solver | COA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="chip">ISA</span><div><strong>ISA Problem Solver</strong><small>Computer Organization & Architecture</small></div></div>
+    <span class="status" id="backendStatus">Checking backend…</span>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <p class="eyebrow">LEARN • PRACTISE • SOLVE</p>
+      <h1>Instruction Set Architecture</h1>
+      <p>Understand processor instructions and solve common ISA problems with guided calculations.</p>
+      <div class="hero-tags"><span>Instruction formats</span><span>Addressing modes</span><span>Number systems</span><span>Instruction execution</span></div>
+    </section>
+
+    <nav class="tabs" aria-label="Problem solver sections">
+      <button class="tab active" data-panel="overview">Overview</button>
+      <button class="tab" data-panel="convert">Number converter</button>
+      <button class="tab" data-panel="address">Addressing modes</button>
+      <button class="tab" data-panel="simulate">Instruction simulator</button>
+      <button class="tab" data-panel="encode">Instruction format</button>
+      <button class="tab" data-panel="quiz">Practice quiz</button>
+    </nav>
+
+    <section class="panel active" id="overview">
+      <div class="section-heading"><div><p class="eyebrow">START HERE</p><h2>What is ISA?</h2></div></div>
+      <p class="lead">Instruction Set Architecture (ISA) is the programmer-visible specification of a processor. It defines the instructions, registers, data types, addressing modes and memory operations that software can use.</p>
+      <div class="cards">
+        <article class="info-card"><div class="icon">01</div><h3>Instruction set</h3><p>Operations such as ADD, SUB, LOAD, STORE, AND and OR.</p></article>
+        <article class="info-card"><div class="icon">02</div><h3>Registers</h3><p>Small, fast storage locations available to instructions.</p></article>
+        <article class="info-card"><div class="icon">03</div><h3>Addressing modes</h3><p>Rules that describe how an instruction finds its operand.</p></article>
+        <article class="info-card"><div class="icon">04</div><h3>Instruction format</h3><p>The bit fields used to represent an instruction.</p></article>
+      </div>
+      <div class="notice"><strong>Important:</strong> ISA is the interface between software and processor hardware. Different processor families use different instruction sets, so always check which ISA your class problem specifies.</div>
+      <h2 class="subheading">How to use this website</h2>
+      <ol class="steps"><li>Choose a calculator from the tabs above.</li><li>Enter the values given in your question.</li><li>Press Solve or Calculate.</li><li>Read the result and the explanation below it.</li></ol>
+    </section>
+
+    <section class="panel" id="convert">
+      <div class="section-heading"><div><p class="eyebrow">CALCULATOR 01</p><h2>Number system converter</h2></div></div>
+      <p>Convert a binary, decimal or hexadecimal whole number into all three forms.</p>
+      <div class="form-grid">
+        <label>Number<input id="convertValue" inputmode="text" placeholder="Example: 101101"></label>
+        <label>Input format<select id="convertFrom"><option value="binary">Binary</option><option value="decimal">Decimal</option><option value="hex">Hexadecimal</option></select></label>
+      </div>
+      <button class="primary" id="convertBtn">Convert number</button>
+      <div class="output" id="convertOutput" aria-live="polite">Your answer will appear here.</div>
+      <div class="example"><strong>Example:</strong> Binary 1010 = Decimal 10 = Hexadecimal A.</div>
+    </section>
+
+    <section class="panel" id="address">
+      <div class="section-heading"><div><p class="eyebrow">CALCULATOR 02</p><h2>Addressing mode solver</h2></div></div>
+      <p>Calculate an effective address for common addressing modes.</p>
+      <div class="form-grid">
+        <label>Addressing mode<select id="addressMode"><option value="direct">Direct</option><option value="indirect">Indirect (pointer location)</option><option value="register">Register</option><option value="indexed">Indexed</option><option value="base-displacement">Base + displacement</option></select></label>
+        <label>Address field / memory address<input id="addressField" type="number" value="500"></label>
+        <label>Register value / index register<input id="registerValue" type="number" value="20"></label>
+        <label>Displacement<input id="displacement" type="number" value="12"></label>
+      </div>
+      <button class="primary" id="addressBtn">Calculate address</button>
+      <div class="output" id="addressOutput" aria-live="polite">Your answer will appear here.</div>
+      <div class="notice"><strong>Note:</strong> For indirect addressing, a real processor reads the effective address from memory at the pointer location. This simple calculator shows the pointer location because it does not model a full memory array.</div>
+    </section>
+
+    <section class="panel" id="simulate">
+      <div class="section-heading"><div><p class="eyebrow">CALCULATOR 03</p><h2>Instruction simulator</h2></div></div>
+      <p>Try simple register-style operations and see the result.</p>
+      <div class="form-grid">
+        <label>Instruction<select id="instruction"><option>ADD</option><option>SUB</option><option>MUL</option><option>AND</option><option>OR</option><option>XOR</option><option>LOAD</option><option>INC</option></select></label>
+        <label>Operand A / value to load<input id="operandA" type="number" value="12"></label>
+        <label>Operand B<input id="operandB" type="number" value="5"></label>
+        <label>Initial register value (for INC)<input id="initialValue" type="number" value="7"></label>
+      </div>
+      <button class="primary" id="simulateBtn">Execute instruction</button>
+      <div class="output" id="simulateOutput" aria-live="polite">The result will appear here.</div>
+      <div class="example"><strong>Example:</strong> ADD with A = 12 and B = 5 gives 17.</div>
+    </section>
+
+    <section class="panel" id="encode">
+      <div class="section-heading"><div><p class="eyebrow">CALCULATOR 04</p><h2>Instruction format encoder</h2></div></div>
+      <p>Build a teaching example of a 16-bit instruction by entering each field.</p>
+      <div class="format-bar"><span>Opcode<br><b>4 bits</b></span><span>Destination<br><b>3 bits</b></span><span>Source 1<br><b>3 bits</b></span><span>Source 2<br><b>3 bits</b></span><span>Function<br><b>3 bits</b></span></div>
+      <div class="form-grid">
+        <label>Opcode (0–15)<input id="opcode" type="number" min="0" max="15" value="1"></label>
+        <label>Destination register (0–7)<input id="rd" type="number" min="0" max="7" value="1"></label>
+        <label>Source register 1 (0–7)<input id="rs1" type="number" min="0" max="7" value="2"></label>
+        <label>Source register 2 (0–7)<input id="rs2" type="number" min="0" max="7" value="3"></label>
+        <label>Function (0–7)<input id="func" type="number" min="0" max="7" value="0"></label>
+      </div>
+      <button class="primary" id="encodeBtn">Generate instruction</button>
+      <div class="output" id="encodeOutput" aria-live="polite">Encoded instruction will appear here.</div>
+      <div class="notice"><strong>Academic note:</strong> This is a simplified 16-bit teaching format (4 + 3 + 3 + 3 + 3 bits), not the actual encoding of ARM, RISC-V or x86. Use your syllabus format if it specifies another layout.</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-heading"><div><p class="eyebrow">CHECK YOUR KNOWLEDGE</p><h2>ISA practice quiz</h2></div></div>
+      <div id="quizQuestions"></div>
+      <button class="primary" id="quizSubmit">Check my answers</button>
+      <button class="secondary" id="quizReset">Try again</button>
+      <div class="output" id="quizOutput" aria-live="polite">Choose one answer for each question.</div>
+    </section>
+
+    <section class="bottom-note">
+      <strong>Study reminder</strong>
+      <p>This project is an educational simulator. It explains common ISA concepts, but it does not emulate a real commercial CPU. Always match instruction encodings and addressing rules to the processor architecture named in your textbook or question.</p>
+    </section>
+  </main>
+  <footer>ISA Problem Solver • COA Learning Project</footer>
+  <script src="app.js"></script>
+</body>
+</html>
